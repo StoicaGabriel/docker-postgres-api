@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  product-service:
+    build: ./src
+    volumes:
+      - ./src:/usr/src/app
+    ports:
+      - 5001:80
+
+  db:
+    image: postgres
+    env_file:
+      - database.env
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    depends_on:
+      - product-service
+
+# Previne pierderea datelor la recrearea containerului
+volumes:
+  db-data:
+
