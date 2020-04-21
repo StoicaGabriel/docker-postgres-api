@@ -34,9 +34,10 @@ class Student(db.Model):
     # Current exam scores for all past years and semesters
     scores = db.Column(db.String(200), unique=False, nullable=True)
     # Foreign key to a StudyClass instance
-    study_class = db.Column()  # TODO: fill foreign key info
+    study_class = db.Column(db.Integer, db.ForeignKey('st_class.id'))
 
-    st_class = db.relationship()  # TODO: fill relationship info
+    # Foreign key relationship
+    st_class = db.relationship('StudyClass', backref=db.backref('students', lazy=True))
 
 
 class Professor(db.Model):
@@ -52,7 +53,9 @@ class StudyClass(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(10), unique=True, nullable=False)
     year_of_study = db.Column(db.String(2), unique=False, nullable=False)
-    schedule = db.Column()  # TODO: fill foreign key info
+    schedule = db.Column(db.Integer, db.ForeignKey('sc'))
+
+    sc = db.relationship('Schedule', backref=db.backref('classes', lazy=True))
 
 
 class Schedule(db.Model):
