@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  product-service:
+  api:
     build: ./src
     volumes:
       - ./src:/usr/src/app
@@ -17,7 +17,7 @@ services:
     ports:
       - 5432:5432
     depends_on:
-      - product-service
+      - api
 
 # Previne pierderea datelor la recrearea containerului
 volumes:
