@@ -81,23 +81,3 @@ def create_all_tables():
 
 def drop_all_tables():
     db.drop_all()
-
-
-def insert_into():
-    raise NotImplementedError
-
-
-def update_one():
-    raise NotImplementedError
-
-
-def delete_one():
-    raise NotImplementedError
-
-
-if __name__ == '__main__':
-    # TODO: cleanup useless fields & separate function for creating everything
-    drop_all_tables()
-    create_all_tables()
-
-    # Classic insert manually TBD
