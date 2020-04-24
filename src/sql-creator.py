@@ -1,18 +1,7 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from src.app import db, create_app
 
-app = Flask(__name__)
-
-POSTGRES_URL = 'localhost:5432'
-POSTGRES_USER = 'student'
-POSTGRES_PW = 'parola'
-POSTGRES_DB = 'db'
-
-DB_URL = 'postgresql://{user}:{pw}@{url}/{db}'.format(
-    user=POSTGRES_USER,pw=POSTGRES_PW,url=POSTGRES_URL,db=POSTGRES_DB
-)
-app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
-db = SQLAlchemy(app)
+app = create_app()
+app.app_context().push()
 
 
 class User(db.Model):
