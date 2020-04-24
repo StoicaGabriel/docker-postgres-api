@@ -49,6 +49,7 @@ class Professor(db.Model):
 
     # Relationship for foreign key in a different table
     study_classes = db.relationship('StudyClass', backref='professor')
+    discipline = db.relationship('Discipline', backref='professor')
 
 
 class StudyClass(db.Model):
@@ -82,8 +83,30 @@ class Discipline(db.Model):
 
     schedule_id = db.Column(db.Integer, db.ForeignKey('schedule.id'))
     study_class_id = db.Column(db.Integer, db.ForeignKey('study_class.id'))
+    professor_id = db.Column(db.Integer, db.ForeignKey('professor.id'))
+
+
+def create_all_tables():
+    db.create_all()
+
+
+def drop_all_tables():
+    db.drop_all()
+
+
+def insert_into():
+    raise NotImplementedError
+
+
+def update_one():
+    raise NotImplementedError
+
+
+def delete_one():
+    raise NotImplementedError
 
 
 if __name__ == '__main__':
     # TODO: cleanup useless fields & separate function for creating everything
-    db.create_all()
+    drop_all_tables()
+    create_all_tables()
