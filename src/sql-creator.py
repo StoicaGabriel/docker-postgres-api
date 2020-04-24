@@ -99,3 +99,5 @@ if __name__ == '__main__':
     # TODO: cleanup useless fields & separate function for creating everything
     drop_all_tables()
     create_all_tables()
+
+    # Classic insert manually TBD
