@@ -16,7 +16,6 @@ if __name__ == '__main__':
     db.session.add(guest)
     db.session.commit()
 
-
     # Create some professors and insert them into table
     prof1 = Professor(name='Popescu', surname='Marin', merits='Prof. dr. Ing.')
     prof2 = Professor(name='George', surname='Alexandru', merits='Conf. dr. Ing.')
