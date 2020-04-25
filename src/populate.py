@@ -16,10 +16,8 @@ if __name__ == '__main__':
     db.session.add(guest)
     db.session.commit()
 
-    # TODO (in this exact order):
 
     # Create some professors and insert them into table
-
     prof1 = Professor(name='Popescu', surname='Marin', merits='Prof. dr. Ing.')
     prof2 = Professor(name='George', surname='Alexandru', merits='Conf. dr. Ing.')
     prof3 = Professor(name='Popescu', surname='Andrei', merits='S.I. dr. Ing.')
@@ -59,7 +57,6 @@ if __name__ == '__main__':
 
     # Create some study classes and insert them into table
     # By default, a class cannot be formed in the absence of a schedule
-
     study_class = StudyClass(
         name="1-A",
         year_of_study="1L",
@@ -71,7 +68,6 @@ if __name__ == '__main__':
     db.session.commit()
 
     # Create some students and insert them into table
-
     for i in range(100):
         name = "Student" + str(i + 1)
         surname = "Student" + str(i + 1)
@@ -134,4 +130,25 @@ if __name__ == '__main__':
     db.session.add(imagistica)
     db.session.commit()
 
-    # Update some, then delete some and query some tables (maybe separate functions)
+    # Select professors based on merit
+    phd_professors = Professor.query.filter_by(merits='Prof. dr. Ing.').all()
+    print(phd_professors)
+
+    # Select students based on admission score
+    top_students = Student.query.filter(Student.adm_score >= 90).all()
+    print(top_students)
+
+    # Pretty printing
+    for student in top_students:
+        print(student)
+
+    # Delete students with adm_scores lower than 60
+    bottom_students = Student.query.filter(Student.adm_score < 60).all()
+    for student in bottom_students:
+        db.session.delete(student)
+    db.session.commit()
+
+    # Update a professor's merits
+    professor = Professor.query.filter_by(name='George').first()
+    professor.merits = 'Prof. dr. Ing.'
+    db.session.commit()
