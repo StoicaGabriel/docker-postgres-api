@@ -28,6 +28,9 @@ class Student(db.Model):
     # Foreign key relationship
     study_class = db.relationship('StudyClass', backref=db.backref('students', lazy=True))
 
+    def __repr__(self):
+        return f'{self.name} {self.surname} {self.address} {self.adm_score} {self.scores}'
+
 
 class Professor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -39,6 +42,9 @@ class Professor(db.Model):
     # Relationship for foreign key in a different table
     study_classes = db.relationship('StudyClass', backref='professor')
     discipline = db.relationship('Discipline', backref='professor')
+
+    def __repr__(self):
+        return f'{self.merits} {self.name} {self.surname}'
 
 
 class StudyClass(db.Model):
@@ -52,6 +58,9 @@ class StudyClass(db.Model):
     schedule = db.relationship('Schedule', backref=db.backref('classes', lazy=True))
     discipline = db.relationship('Discipline', backref='study_class')
 
+    def __repr__(self):
+        return f'{self.name} {self.year_of_study}'
+
 
 class Schedule(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -60,8 +69,10 @@ class Schedule(db.Model):
 
     disciplines = db.relationship('Discipline', backref='schedule')
 
+    def __repr__(self):
+        return f'{self.schedule}'
 
-# Not implemented, TBD if needs to be added
+
 class Discipline(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=False, nullable=False)
@@ -73,6 +84,9 @@ class Discipline(db.Model):
     schedule_id = db.Column(db.Integer, db.ForeignKey('schedule.id'))
     study_class_id = db.Column(db.Integer, db.ForeignKey('study_class.id'))
     professor_id = db.Column(db.Integer, db.ForeignKey('professor.id'))
+
+    def __repr__(self):
+        return f'{self.name} {self.course_schedule} {self.lab_schedule} {self.seminary_schedule}'
 
 
 def create_all_tables():
