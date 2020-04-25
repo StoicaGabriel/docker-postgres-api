@@ -34,7 +34,7 @@ class Professor(db.Model):
     name = db.Column(db.String(30), unique=False, nullable=False)
     surname = db.Column(db.String(30), unique=False, nullable=False)
     # Rank of the teacher eg. PhD...
-    merits = db.Column(db.String(10), unique=False, nullable=False)
+    merits = db.Column(db.String(20), unique=False, nullable=False)
 
     # Relationship for foreign key in a different table
     study_classes = db.relationship('StudyClass', backref='professor')
@@ -56,7 +56,7 @@ class StudyClass(db.Model):
 class Schedule(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     # This is where the schedule is written for every week's day
-    schedule = db.Column(db.String(200), unique=False, nullable=True)
+    schedule = db.Column(db.String(1000), unique=False, nullable=True)
 
     disciplines = db.relationship('Discipline', backref='schedule')
 
@@ -64,11 +64,11 @@ class Schedule(db.Model):
 # Not implemented, TBD if needs to be added
 class Discipline(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20), unique=False, nullable=False)
+    name = db.Column(db.String(50), unique=False, nullable=False)
     # Day of the week + hour interval of the class
-    course_schedule = db.Column(db.String(20), unique=False, nullable=True)
-    lab_schedule = db.Column(db.String(20), unique=False, nullable=True)
-    seminary_schedule = db.Column(db.String(20), unique=False, nullable=True)
+    course_schedule = db.Column(db.String(50), unique=False, nullable=True)
+    lab_schedule = db.Column(db.String(50), unique=False, nullable=True)
+    seminary_schedule = db.Column(db.String(50), unique=False, nullable=True)
 
     schedule_id = db.Column(db.Integer, db.ForeignKey('schedule.id'))
     study_class_id = db.Column(db.Integer, db.ForeignKey('study_class.id'))
