@@ -1,6 +1,5 @@
-This is an application which uses dockerized postgresql database and python api to create and
-manage a database structure.
+# About
 
+This application uses a dockerized postgresql database and a python api to create a manageable system where the database can be easily accessed through python commands.
 
-The env files (*.env) are pushed into the repository because this project is done for research
-purposes.
+The env files (*.env) are pushed into the repository because this project is done for educational purposes.
